@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import { changeShowForm } from '../actions/blood';
 
 const RequestDetail = ({ request, changeShowForm }) => {
+
+    const idRef = useRef(null);
+
+    const onCopy = () => {
+        const range = document.createRange();
+        range.selectNode(idRef.current);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();
+    }
+
+    const copyStyles = { marginLeft: '20px', paddingTop: '10px', cursor: 'pointer' }
+
     const renderContent = () => {
 
         if (request) {
@@ -19,13 +33,14 @@ const RequestDetail = ({ request, changeShowForm }) => {
                     </div>
                     <hr />
                     <div className="row">
+                        {/* <div className="row"> */}
                         <div className="col s3"><strong>Request ID</strong>:</div>
-                        <div className="col s3">{_id}</div>
+                        <div className="col s9"> <span ref={idRef}> {_id}</span> <i onClick={onCopy} title='Click to copy' style={copyStyles} className="material-icons">content_copy</i></div>
 
-
-
-
-                        <small>Please store this ID track your request.</small>
+                    </div>
+                    <div className="row">
+                        <div className="col s3"></div>
+                        <div className="col s9"><small>Please store this ID track your request.</small></div>
                     </div>
                     <hr />
                     <div className="row">
@@ -40,7 +55,7 @@ const RequestDetail = ({ request, changeShowForm }) => {
                     <hr />
                     <div className="row">
                         <div className="col s3"><strong>Patient Address</strong>: </div>
-                        <div className="col s3">{city}, {state}, {country}</div>
+                        <div className="col s9">{city}, {state}, {country}</div>
                     </div>
                     <hr />
                     <div className="row">

@@ -8,7 +8,7 @@ const RequestForm = ({ requestBlood, auth: { isAuthenticated, user } }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    bloodgrp: 'O+',
+    bloodgrp: '',
     city: '',
     state: '',
     country: '',
@@ -32,7 +32,7 @@ const RequestForm = ({ requestBlood, auth: { isAuthenticated, user } }) => {
     setFormData({
       name: (user && user.name) || '',
       email: (user && user.email) || '',
-      bloodgrp: (user && user.bloodgrp) || 'O+',
+      bloodgrp: (user && user.bloodgrp) || '',
       city: (user && user.address.city) || '',
       state: (user && user.address.state) || '',
       country: (user && user.address.country) || '',
@@ -81,6 +81,7 @@ const RequestForm = ({ requestBlood, auth: { isAuthenticated, user } }) => {
                 value={bloodgrp}
                 onChange={onChange}
               >
+                <option value=''>Choose blood group</option>
                 <option value='O+'>O+</option>
                 <option value='O-'>O-</option>
                 <option value='A+'>A+</option>

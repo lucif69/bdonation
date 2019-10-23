@@ -114,6 +114,7 @@ const ActiveItem = ({ match, resetTrack, trackRequest, request, auth, donate, hi
     const btnStyles = {
         marginTop: '15px',
         marginBottom: '15px',
+        marginRight: '15px'
     };
 
     return (
@@ -139,9 +140,7 @@ const ActiveItem = ({ match, resetTrack, trackRequest, request, auth, donate, hi
                 cancel
             </button>}
 
-            {/* <button className="btn black">
-                donate
-            </button> */}
+
 
         </div>
     );

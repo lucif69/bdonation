@@ -6,7 +6,7 @@ import { searchBlood } from '../actions/blood';
 
 const Search = ({ searchBlood }) => {
     const [formData, setFormData] = useState({
-        bloodgrp: 'O+',
+        bloodgrp: '',
         city: '',
         state: '',
         country: ''
@@ -35,6 +35,7 @@ const Search = ({ searchBlood }) => {
                     <div className='row'>
                         <div className='input-field col s12'>
                             <select name='bloodgrp' value={bloodgrp} onChange={onChange}>
+                                <option value="">Choose blood group</option>
                                 <option value='O+'>O+</option>
                                 <option value='O-'>O-</option>
                                 <option value='A+'>A+</option>

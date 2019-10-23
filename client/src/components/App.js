@@ -41,8 +41,8 @@ const App = ({ loadUser, isAuthenticated }) => {
         <div className='container'>
           <Alert />
           <Switch>
-            <PrivateRoute path='/previous' exact component={PrevDonations} />
-            <PrivateRoute path='/dashboard' exact component={Dashboard} />
+            <PrivateRoute path='/previous' isAuthenticated={isAuthenticated} exact component={PrevDonations} />
+            <PrivateRoute path='/dashboard' isAuthenticated={isAuthenticated} exact component={Dashboard} />
 
             <Route path='/register' exact component={Register} />
             <Route path='/request' exact component={BloodRequest} />

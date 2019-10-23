@@ -41,11 +41,6 @@ p {
   z-index: -1;
 }
 
-.select-dropdown.dropdown-content li.selected {
-  background-color: rgba(0, 0, 0, 0.03);
-  display: none;
-}
-
 .parallax-container .section {
   width: 100%;
 }

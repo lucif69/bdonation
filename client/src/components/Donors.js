@@ -37,7 +37,6 @@ const Donors = ({ donors, changeShowForm }) => {
 
   const btnStyles = {
     margin: '1rem 0',
-    padding: '0.2rem 2rem'
   };
 
   return (
