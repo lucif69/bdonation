@@ -8,6 +8,45 @@ const User = mongoose.model('users');
 const { JWT_SECRET } = require('../config/keys');
 const auth = require('../middlewares/auth');
 
+router.post('/edit', auth, [
+  check('newp', 'Password must be of at least 6 characters').isLength({
+    min: 6
+  }),
+], async (req, res) => {
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty())
+    return res.status(400).json({ errors: errors.array() });
+
+  const { newp, current } = req.body;
+
+  try {
+    const user = await User.findById(req.user.id);
+
+    const isMatch = await bcrypt.compare(current, user.password);
+
+    if (!isMatch)
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'Invalid credentials' }] });
+
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(newp, salt);
+    user.password = hash;
+
+    await user.save();
+    res.json({ msg: 'Password Updated' });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Server error');
+  }
+
+
+});
+
 router.post(
   '/',
   [

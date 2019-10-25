@@ -7,11 +7,13 @@ import { logout } from '../actions/authActions';
 const Navbar = ({ isAuthenticated, loading, logout, history }) => {
   useEffect(() => {
     M.Sidenav.init(document.querySelectorAll('.sidenav'));
+    M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'));
   }, []);
 
   const authLinks = (
     <Fragment>
-      <li><Link to='/previous'>View Previous Donations</Link></li>
+      <li><Link to='/previous'>Previous Donations</Link></li>
+      <li><Link to='/account'>Account</Link></li>
       <li>
         <a
           href='#!'
@@ -48,12 +50,19 @@ const Navbar = ({ isAuthenticated, loading, logout, history }) => {
           <li>
             <Link to='/search'>Search Blood</Link>
           </li>
-          <li>
-            <Link to='/request'>Request Blood</Link>
-          </li>
-          <li>
-            <Link to='/track'>Track Request</Link>
-          </li>
+
+
+          <li> <a className='dropdown-trigger' href='#!' data-target='dropdown1'>Request Blood</a> </li>
+
+          <ul id='dropdown1' className='dropdown-content'>
+            <li>
+              <Link to='/request'>Make Request</Link>
+            </li>
+            <li>
+              <Link to='/track'>Track Request</Link>
+            </li>
+          </ul>
+
           {<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>}
         </ul>
 

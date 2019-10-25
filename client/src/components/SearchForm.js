@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import M from 'materialize-css';
 import { connect } from 'react-redux';
 import { searchBlood } from '../actions/blood';

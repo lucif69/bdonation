@@ -26,7 +26,7 @@ const Login = ({ login, isAuthenticated }) => {
   if (isAuthenticated) return <Redirect to='/dashboard' />;
 
   return (
-    <div style={{ height: '100vh' }}>
+    <div>
       <h3>Login</h3>
       <div className='row'>
         <form className='col s12' onSubmit={onSubmit}>

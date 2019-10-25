@@ -12,6 +12,7 @@ import Landing from './Landing/Landing';
 import Dashboard from './Dashboard';
 import Register from './Register';
 import Login from './Login';
+import Account from './Account';
 import Alert from './Alert';
 import setAuthToken from '../utils/setAuthToken';
 import PrivateRoute from './routing/PrivateRoute';
@@ -22,13 +23,16 @@ import ActiveItem from './ActiveItem';
 import Track from './Track';
 import Search from './Search';
 
+import { authError } from '../actions/authActions';
+
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = ({ loadUser, isAuthenticated }) => {
+const App = ({ loadUser, isAuthenticated, authError }) => {
   useEffect(() => {
     if (localStorage.token) loadUser();
+    else authError();
   }, []);
 
   return (
@@ -41,8 +45,9 @@ const App = ({ loadUser, isAuthenticated }) => {
         <div className='container'>
           <Alert />
           <Switch>
-            <PrivateRoute path='/previous' isAuthenticated={isAuthenticated} exact component={PrevDonations} />
-            <PrivateRoute path='/dashboard' isAuthenticated={isAuthenticated} exact component={Dashboard} />
+            <PrivateRoute path='/previous' exact component={PrevDonations} />
+            <PrivateRoute path='/dashboard' exact component={Dashboard} />
+            <PrivateRoute path='/account' exact component={Account} />
 
             <Route path='/register' exact component={Register} />
             <Route path='/request' exact component={BloodRequest} />
@@ -64,5 +69,5 @@ const mapStateToProps = ({ auth: { isAuthenticated } }) => ({
 
 export default connect(
   mapStateToProps,
-  { loadUser }
+  { loadUser, authError }
 )(App);
