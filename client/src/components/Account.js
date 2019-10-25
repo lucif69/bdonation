@@ -18,13 +18,15 @@ const Account = ({ user, setAlert, changePassword }) => {
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
 
+    const clear = () => setFormData({ ...formData, current: '', newp: '', confirm: '' })
+
     const onSubmit = async e => {
         e.preventDefault();
         if (!newp || !current || !confirm)
             setAlert('Please fill in all fields', 'red');
         else if (newp !== confirm)
             setAlert('New Passwords do not match', 'red');
-        else { await changePassword(current, newp); toggleForm(!form) }
+        else { await changePassword(current, newp); clear(); toggleForm(!form) }
     }
 
     return (
