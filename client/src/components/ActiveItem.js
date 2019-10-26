@@ -50,6 +50,7 @@ const ActiveItem = ({ match, resetTrack, trackRequest, request, auth, donate, hi
     useEffect(() => {
         trackRequest(id);
         return () => resetTrack();
+        // eslint-disable-next-line react-hooks/exhaustive-deps        
     }, []);
 
     const renderContent = () => {

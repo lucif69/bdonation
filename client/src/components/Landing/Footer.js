@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -9,64 +10,39 @@ const Footer = () => {
             <h5 className='black-text'>Our Bio</h5>
             <p className='black-text text-lighten-4'>
               We are a team of college students working on this project like
-              it's our full time job. Any amount would help support and continue
-              development on this project and is greatly appreciated.
+              it's our full time job. Any support is greatly appreciated.
             </p>
           </div>
-          <div className='col l3 s12'>
-            <h5 className='black-text'>Settings</h5>
+
+          <div className='col l3 s12 right'>
+            <h5 className='black-text'>Links</h5>
             <ul>
               <li>
-                <a className='black-text' href='#!'>
-                  Link 1
-                </a>
+                <Link className='black-text' to='/register'>
+                  Register as a Donor
+                </Link>
               </li>
               <li>
-                <a className='black-text' href='#!'>
-                  Link 2
-                </a>
+                <Link className='black-text' to='/login'>
+                  Login as a Donor
+                </Link>
               </li>
               <li>
-                <a className='black-text' href='#!'>
-                  Link 3
-                </a>
+                <Link className='black-text' to='/search'>
+                  Search For Donors
+                </Link>
               </li>
               <li>
-                <a className='black-text' href='#!'>
-                  Link 4
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className='col l3 s12'>
-            <h5 className='black-text'>Connect</h5>
-            <ul>
-              <li>
-                <a className='black-text' href='#!'>
-                  Link 1
-                </a>
-              </li>
-              <li>
-                <a className='black-text' href='#!'>
-                  Link 2
-                </a>
-              </li>
-              <li>
-                <a className='black-text' href='#!'>
-                  Link 3
-                </a>
-              </li>
-              <li>
-                <a className='black-text' href='#!'>
-                  Link 4
-                </a>
+                <Link className='black-text' to='request'>
+                  Request for Blood
+                </Link>
               </li>
             </ul>
           </div>
         </div>
       </div>
       <div className='footer-copyright'>
-        <div className='container brown-text'>Made by Believers</div>
+        <div className='container center brown-text'>&copy; {new Date().getFullYear()} BDonation. All Rights Reserved</div>
       </div>
     </footer>
   );

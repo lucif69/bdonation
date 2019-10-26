@@ -6,11 +6,12 @@ const { check, validationResult } = require('express-validator');
 
 const { JWT_SECRET } = require('../config/keys');
 const User = mongoose.model('users');
+const capitalize = require('../middlewares/capitalize');
 
 // Register
 router.post(
   '/',
-  [
+  [capitalize,
     check('name', 'Name is required')
       .not()
       .isEmpty(),

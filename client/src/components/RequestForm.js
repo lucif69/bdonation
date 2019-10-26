@@ -38,6 +38,8 @@ const RequestForm = ({ requestBlood, auth: { isAuthenticated, user } }) => {
       country: (user && user.address.country) || '',
       purpose: ''
     });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
   return (

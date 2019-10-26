@@ -10,6 +10,7 @@ const PrevDonations = ({ getPrevDonations, requests, isAuthenticated }) => {
     useEffect(() => {
         getPrevDonations();
         return () => resetTrack()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     if (!isAuthenticated)
         return <Redirect to='/login' />

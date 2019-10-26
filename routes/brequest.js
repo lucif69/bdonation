@@ -3,6 +3,7 @@ const { check, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
 const BRequest = mongoose.model('brequests');
 const auth = require('../middlewares/auth');
+const capitalize = require('../middlewares/capitalize');
 const User = mongoose.model('users');
 const Mailer = require('../services/Mailer');
 const needBloodTemplate = require('../services/templates/needBlood');
@@ -12,7 +13,7 @@ const donorCancelledTemplate = require('../services/templates/donorCancelled');
 // Request for blood
 router.post(
   '/request',
-  [
+  [capitalize,
     check('name', 'Name is required')
       .not()
       .isEmpty(),
@@ -94,7 +95,7 @@ router.post(
 // search for blood
 router.post(
   '/search',
-  [
+  [capitalize,
     check('bloodgrp', 'Blood group is required')
       .not()
       .isEmpty(),

@@ -8,6 +8,7 @@ const Dashboard = ({ getActiveRequests, requests }) => {
 
   useEffect(() => {
     getActiveRequests();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

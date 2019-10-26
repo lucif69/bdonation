@@ -10,6 +10,7 @@ const Search = ({ changeShowForm, blood: { donors, showForm } }) => {
     return () => {
       changeShowForm();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return showForm ? <SearchForm /> : <Donors donors={donors} />;

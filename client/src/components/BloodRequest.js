@@ -10,6 +10,7 @@ const BloodRequest = ({ changeShowForm, blood: { request, showForm } }) => {
     return () => {
       changeShowForm();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return showForm ? <RequestForm /> : <RequestDetail request={request} />;

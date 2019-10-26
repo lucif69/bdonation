@@ -33,6 +33,7 @@ const App = ({ loadUser, isAuthenticated, authError }) => {
   useEffect(() => {
     if (localStorage.token) loadUser();
     else authError();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
