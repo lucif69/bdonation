@@ -8,44 +8,76 @@ const User = mongoose.model('users');
 const { JWT_SECRET } = require('../config/keys');
 const auth = require('../middlewares/auth');
 
-router.post('/edit', auth, [
-  check('newp', 'Password must be of at least 6 characters').isLength({
-    min: 6
-  }),
-], async (req, res) => {
+// change password
+router.post(
+  '/edit',
+  auth,
+  [
+    check('newp', 'Password must be of at least 6 characters').isLength({
+      min: 6
+    })
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
 
-  const errors = validationResult(req);
+    if (!errors.isEmpty())
+      return res.status(400).json({ errors: errors.array() });
 
-  if (!errors.isEmpty())
-    return res.status(400).json({ errors: errors.array() });
+    const { newp, current } = req.body;
 
-  const { newp, current } = req.body;
+    try {
+      const user = await User.findById(req.user.id);
 
-  try {
-    const user = await User.findById(req.user.id);
+      const isMatch = await bcrypt.compare(current, user.password);
 
-    const isMatch = await bcrypt.compare(current, user.password);
+      if (!isMatch)
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Invalid credentials' }] });
 
-    if (!isMatch)
-      return res
-        .status(400)
-        .json({ errors: [{ msg: 'Invalid credentials' }] });
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(newp, salt);
+      user.password = hash;
 
-
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(newp, salt);
-    user.password = hash;
-
-    await user.save();
-    res.json({ msg: 'Password Updated' });
-
-  } catch (err) {
-    console.log(err);
-    res.status(500).send('Server error');
+      await user.save();
+      res.json({ msg: 'Password Updated' });
+    } catch (err) {
+      console.log(err);
+      res.status(500).send('Server error');
+    }
   }
+);
 
+// change phone
+router.put(
+  '/edit',
+  auth,
+  [
+    check('phone', 'Phone Number must be of at least 10 characters').isLength({
+      min: 10
+    })
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
 
-});
+    if (!errors.isEmpty())
+      return res.status(400).json({ errors: errors.array() });
+
+    const { phone } = req.body;
+
+    try {
+      const user = await User.findById(req.user.id);
+
+      user.phone = phone;
+
+      await user.save();
+      res.json({ msg: 'Phone Number Updated' });
+    } catch (err) {
+      console.log(err);
+      res.status(500).send('Server error');
+    }
+  }
+);
 
 router.post(
   '/',

@@ -3,7 +3,7 @@ const express = require('express');
 // const cookieSession = require('cookie-session');
 const path = require('path');
 const mongoose = require('mongoose');
-
+const cron = require('node-cron');
 const { MONGO_URI } = require('./config/keys');
 
 const app = express();
@@ -17,8 +17,11 @@ mongoose
   .then(() => console.log('Connected to database'))
   .catch(err => console.log('Failed to connect to database', err));
 
+require('./models/Subscription');
 require('./models/User');
 require('./models/Brequest');
+
+const sendMonthlyEmails = require('./services/sendMonthlyEmails');
 
 // app.use(
 //   cookieSession({
@@ -40,6 +43,11 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/blood', require('./routes/brequest'));
+
+cron.schedule('0 12 * * *', () => {
+  sendMonthlyEmails();
+  // 0 0 12 1 *
+});
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')));

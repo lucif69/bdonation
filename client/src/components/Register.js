@@ -13,6 +13,7 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
     password2: '',
     email: '',
     bloodgrp: '',
+    phone: '',
     city: '',
     state: '',
     country: ''
@@ -24,6 +25,7 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
     password2,
     email,
     bloodgrp,
+    phone,
     city,
     state,
     country
@@ -47,7 +49,16 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
     if (password !== password2) {
       setAlert('Passwords do not match', 'red');
     } else {
-      register({ name, email, password, bloodgrp, city, state, country });
+      register({
+        name,
+        email,
+        password,
+        bloodgrp,
+        city,
+        state,
+        country,
+        phone
+      });
     }
   };
 
@@ -76,7 +87,7 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
           </div>
 
           <div className='row'>
-            <div className='input-field col s12'>
+            <div className='input-field col s6'>
               <input
                 name='email'
                 value={email}
@@ -86,6 +97,17 @@ const Register = ({ register, setAlert, isAuthenticated }) => {
                 className='validate'
               />
               <label htmlFor='email'>Email</label>
+            </div>
+            <div className='input-field col s6'>
+              <input
+                name='phone'
+                value={phone}
+                onChange={onChange}
+                id='phone'
+                type='text'
+                className='validate'
+              />
+              <label htmlFor='phone'>Phone</label>
             </div>
           </div>
 

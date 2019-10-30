@@ -1,6 +1,5 @@
-
-module.exports = ({ name, email, }) => {
-    return `
+module.exports = ({ name, email, phone }) => {
+  return `
         <html>
 
             <body>
@@ -13,6 +12,9 @@ module.exports = ({ name, email, }) => {
                     </div>
                     <div>
                         <strong>Email</strong>: ${email}
+                    </div>
+                    <div>
+                        <strong>Phone</strong>: ${phone}
                     </div>
                     
                     <div>

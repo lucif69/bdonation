@@ -29,6 +29,7 @@ export const register = ({
   email,
   password,
   bloodgrp,
+  phone,
   city,
   state,
   country
@@ -45,6 +46,7 @@ export const register = ({
     password,
     bloodgrp,
     city,
+    phone,
     state,
     country
   };
@@ -92,7 +94,7 @@ export const login = (email, password) => async dispatch => {
 
 export const logout = history => dispatch => {
   dispatch({ type: LOGOUT });
-  dispatch(setAlert(`You're successfully logged out`, 'green'))
+  dispatch(setAlert(`You're successfully logged out`, 'green'));
   dispatch({ type: REQUEST_FAIL });
   history.push('/login');
 };
@@ -105,7 +107,11 @@ export const changePassword = (current, newp) => async dispatch => {
   };
 
   try {
-    const { data } = await axios.post('/api/auth/edit', { current, newp }, config);
+    const { data } = await axios.post(
+      '/api/auth/edit',
+      { current, newp },
+      config
+    );
     dispatch(setAlert(data.msg, 'green'));
   } catch (err) {
     const { errors } = err.response.data;
@@ -114,7 +120,25 @@ export const changePassword = (current, newp) => async dispatch => {
 
     console.log(err);
   }
+};
 
-}
+export const changePhone = phone => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  try {
+    const { data } = await axios.put('/api/auth/edit', { phone }, config);
+    dispatch(setAlert(data.msg, 'green'));
+  } catch (err) {
+    const { errors } = err.response.data;
+
+    if (errors) errors.forEach(error => dispatch(setAlert(error.msg, 'red')));
+
+    console.log(err);
+  }
+};
 
 export const authError = () => ({ type: AUTH_ERROR });

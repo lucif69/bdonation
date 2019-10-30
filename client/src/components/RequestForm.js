@@ -9,13 +9,24 @@ const RequestForm = ({ requestBlood, auth: { isAuthenticated, user } }) => {
     name: '',
     email: '',
     bloodgrp: '',
+    phone: '',
     city: '',
     state: '',
     country: '',
+    reminder: false,
     purpose: ''
   });
 
-  const { name, email, bloodgrp, city, state, country } = formData;
+  const {
+    name,
+    email,
+    bloodgrp,
+    phone,
+    reminder,
+    city,
+    state,
+    country
+  } = formData;
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -33,6 +44,7 @@ const RequestForm = ({ requestBlood, auth: { isAuthenticated, user } }) => {
       name: (user && user.name) || '',
       email: (user && user.email) || '',
       bloodgrp: (user && user.bloodgrp) || '',
+      phone: (user && user.phone) || '',
       city: (user && user.address.city) || '',
       state: (user && user.address.state) || '',
       country: (user && user.address.country) || '',
@@ -73,9 +85,22 @@ const RequestForm = ({ requestBlood, auth: { isAuthenticated, user } }) => {
               <label>Patient Email</label>
             </div>
           </div>
+          <div className='row'>
+            <div className='input-field col s12'>
+              <input
+                name='phone'
+                value={phone}
+                onChange={onChange}
+                type='text'
+                placeholder='Phone Number'
+                className='validate active'
+              />
+              <label>Patient Phone Number</label>
+            </div>
+          </div>
 
           <div className='row'>
-            <div className='col s12'>
+            <div className='col s8'>
               <label>Patient Blood Group</label>
               <select
                 className='browser-default'
@@ -93,6 +118,22 @@ const RequestForm = ({ requestBlood, auth: { isAuthenticated, user } }) => {
                 <option value='AB+'>AB+</option>
                 <option value='AB-'>AB-</option>
               </select>
+            </div>
+            <div className='col s4'>
+              <p>
+                <label htmlFor='reminder'>
+                  <input
+                    type='checkbox'
+                    name='reminder'
+                    id='reminder'
+                    defaultChecked={reminder}
+                    onChange={e =>
+                      setFormData({ ...formData, reminder: e.target.checked })
+                    }
+                  />
+                  <span>Need Monthly Reminder ?</span>{' '}
+                </label>
+              </p>
             </div>
           </div>
           <div className='row'>

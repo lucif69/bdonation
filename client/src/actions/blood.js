@@ -10,22 +10,18 @@ import { setAlert } from './alert';
 import axios from 'axios';
 
 export const getActiveRequests = () => async dispatch => {
-
   try {
     const res = await axios.get('/api/blood/requests');
 
     dispatch({ type: TRACK_SUCCESS, payload: res.data });
   } catch (err) {
-
     console.log(err);
 
     dispatch({ type: TRACK_FAIL });
   }
-
-}
+};
 
 export const getPrevDonations = () => async dispatch => {
-
   try {
     const res = await axios.get('/api/blood/prev/requests');
 
@@ -35,30 +31,32 @@ export const getPrevDonations = () => async dispatch => {
 
     dispatch({ type: TRACK_FAIL });
   }
-
-}
+};
 
 export const requestBlood = ({
   name,
   email,
+  phone,
   bloodgrp,
   city,
   state,
-  country
+  country,
+  reminder
 }) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
     }
   };
-
   const body = {
     name,
     email,
+    phone,
     bloodgrp,
     city,
     state,
-    country
+    country,
+    reminder
   };
   try {
     const res = await axios.post('/api/blood/request', body, config);
@@ -114,20 +112,16 @@ export const searchBlood = ({
 // Track
 
 export const trackRequest = id => async dispatch => {
-
   try {
     const res = await axios.get(`/api/blood/track/${id}`);
     dispatch({ type: TRACK_SUCCESS, payload: res.data });
   } catch (err) {
-
     dispatch({ type: TRACK_FAIL });
     console.log(err);
   }
-
-}
+};
 
 export const donate = (id, history) => async dispatch => {
-
   try {
     const res = await axios.put(`/api/blood/request/${id}`);
     dispatch({ type: TRACK_SUCCESS, payload: res.data });
@@ -135,13 +129,11 @@ export const donate = (id, history) => async dispatch => {
 
     history.push('/dashboard');
   } catch (err) {
-    dispatch({ type: TRACK_FAIL })
+    dispatch({ type: TRACK_FAIL });
     console.log(err);
   }
-
-}
+};
 export const cancelDonation = (id, history) => async dispatch => {
-
   try {
     const res = await axios.delete(`/api/blood/request/${id}`);
     dispatch({ type: TRACK_SUCCESS, payload: res.data });
@@ -149,11 +141,10 @@ export const cancelDonation = (id, history) => async dispatch => {
 
     history.push('/dashboard');
   } catch (err) {
-    dispatch({ type: TRACK_FAIL })
+    dispatch({ type: TRACK_FAIL });
     console.log(err);
   }
-
-}
+};
 
 export const changeShowForm = () => ({ type: REQUEST_FAIL });
 export const resetTrack = () => ({ type: TRACK_FAIL });

@@ -11,7 +11,8 @@ const capitalize = require('../middlewares/capitalize');
 // Register
 router.post(
   '/',
-  [capitalize,
+  [
+    capitalize,
     check('name', 'Name is required')
       .not()
       .isEmpty(),
@@ -22,6 +23,9 @@ router.post(
     check('bloodgrp', 'Blood group is required')
       .not()
       .isEmpty(),
+    check('phone', 'Phone number must be of at least 10 characters').isLength({
+      min: 10
+    }),
     check('city', 'City is required')
       .not()
       .isEmpty(),
@@ -38,7 +42,16 @@ router.post(
     if (!errors.isEmpty())
       return res.status(400).json({ errors: errors.array() });
 
-    const { name, email, password, bloodgrp, city, state, country } = req.body;
+    const {
+      name,
+      email,
+      password,
+      bloodgrp,
+      phone,
+      city,
+      state,
+      country
+    } = req.body;
     // console.log(req.body);
 
     const existingUser = await User.findOne({ email });
@@ -53,6 +66,7 @@ router.post(
       email,
       password,
       bloodgrp,
+      phone,
       address
     });
 

@@ -14,6 +14,10 @@ const BRequestSchema = new Schema({
     type: String,
     required: true
   },
+  phone: {
+    type: String,
+    required: true
+  },
   address: {
     city: {
       type: String,
