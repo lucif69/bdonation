@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import { setAlert } from '../actions/alert';
-import { changePassword, changePhone } from '../actions/authActions';
+import { changePassword, changePhone, loadUser } from '../actions/authActions';
 
-const Account = ({ user, setAlert, changePassword, changePhone }) => {
+const Account = ({ user, setAlert, changePassword, changePhone, loadUser }) => {
   const {
     name,
     email,
@@ -47,6 +47,7 @@ const Account = ({ user, setAlert, changePassword, changePhone }) => {
     if (!pno) setAlert('Phone number is blank', 'red');
     else await changePhone(pno);
     setpno('');
+    loadUser();
     togglepnoForm(!pnoForm);
   };
 
@@ -192,5 +193,5 @@ const mapStateToProps = ({ auth: { user } }) => ({ user });
 
 export default connect(
   mapStateToProps,
-  { setAlert, changePassword, changePhone }
+  { setAlert, changePassword, changePhone, loadUser }
 )(Account);
