@@ -194,7 +194,7 @@ router.get('/track/:id', async (req, res) => {
     const request = await BRequest.findById(id);
 
     if (!request)
-      res.status(400).json({ errors: [{ msg: 'Request not found' }] });
+      return status(400).json({ errors: [{ msg: 'Request not found' }] });
 
     res.json({ request });
   } catch (err) {

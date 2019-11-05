@@ -44,9 +44,10 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/blood', require('./routes/brequest'));
 
-cron.schedule('0 12 * * *', () => {
+cron.schedule('* * * * *', () => {
   sendMonthlyEmails();
   // 0 0 12 1 *
+  // 0 12 * * * monthly
 });
 
 if (process.env.NODE_ENV === 'production') {

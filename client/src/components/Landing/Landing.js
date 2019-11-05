@@ -16,7 +16,7 @@ const Landing = ({ isAuthenticated }) => {
 
   return (
     <React.Fragment>
-      <div id='index-banner' className='parallax-container'>
+      <div id='index-banner' className='parallax-container '>
         <div className='section no-pad-bot'>
           <div className='container'>
             <h1 className='header center'>Every blood donor is a life saver</h1>
@@ -113,7 +113,17 @@ const Landing = ({ isAuthenticated }) => {
               </h3>
               <h4>Why Should I Donate Blood?</h4>
               <p className='left-align light'>
-                Safe blood saves lives and improves healthThere is a constant need for regular blood supply because blood can be stored for only a limited time before use. Regular blood donations by a sufficient number of healthy people are needed to ensure that safe blood will be available whenever and wherever it is needed.Blood is the most precious gift that anyone can give to another person — the gift of life. A decision to donate your blood can save a life, or even several if your blood is separated into its components — red cells, platelets and plasma — which can be used individually for patients with specific conditions.
+                Safe blood saves lives and improves healthThere is a constant
+                need for regular blood supply because blood can be stored for
+                only a limited time before use. Regular blood donations by a
+                sufficient number of healthy people are needed to ensure that
+                safe blood will be available whenever and wherever it is
+                needed.Blood is the most precious gift that anyone can give to
+                another person — the gift of life. A decision to donate your
+                blood can save a life, or even several if your blood is
+                separated into its components — red cells, platelets and plasma
+                — which can be used individually for patients with specific
+                conditions.
               </p>
             </div>
           </div>
